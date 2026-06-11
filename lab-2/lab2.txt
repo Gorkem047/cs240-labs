@@ -1,0 +1,119 @@
+Exercise 1
+
+Step 1: Implementing the Disassembler (print_instruction)
+Output: Modified print_instruction() function in ozu-riscv32.c to disassemble hex instructions into RISC-V assembly.
+
+Step 2: Compiling the Code
+Executed make command.
+Output: Successfully compiled the project.
+
+Step 3: Running the Disassembler
+Executed ./ozu-riscv32 ../input/test1.hex command.
+Output: Program loaded and ready to execute commands.
+
+Step 4: Testing the print_program() Function
+Executed p or print command in the simulator.
+Output: Disassembled RISC-V instructions printed on the screen.
+
+Step 5: Verified Output
+Checked that the disassembled instructions match expected RISC-V assembly format.
+Output: Successfully printed hex instructions in readable format.
+
+Step 6: Cleaning and Recompiling the Project
+Executed make clean command.
+Output: Removed old object files and binaries.
+
+Executed make command.
+Output: Successfully recompiled the project from scratch.
+
+Step 7: Running the Program Again
+Executed ./ozu-riscv32 ../input/test1.hex command.
+Output: Program executed successfully, ready for further testing.
+
+Step 8: Implementing the Instruction Simulator (handle_instruction)
+Output: Implemented handle_instruction() in ozu-riscv32.c to simulate instruction execution.
+
+Step 9: Cleaning and Recompiling the Project
+Executed make clean command.
+Output: Removed old object files and binaries.
+
+Executed make command.
+Output: Successfully recompiled the project with instruction execution.
+
+Step 10: Running the Simulator
+Executed ./ozu-riscv32 ../input/test1.hex command.
+Output: Program executed successfully, instructions ready for simulation.
+
+Step 11: Testing the Simulator
+Executed s command in the simulator.
+Output: Instructions executed, register values updated.
+
+Step 12: Checking Register Values
+Executed rdump command.
+Output: Register values displayed, confirming correct execution.
+
+Exercise 2
+
+Step 1: Generating RISC-V Assembly File
+Executed riscv32-unknown-elf-gcc -S testAssembly.c -o testAssembly.s command.
+Output: testAssembly.s assembly file generated.
+
+Step 2: Assembling RISC-V Machine Code
+Executed riscv32-unknown-elf-as testAssembly.s -o testAssembly.o command.
+Output: testAssembly.o object file generated.
+
+Step 3: Linking Object File to Generate Executable
+Executed riscv32-unknown-elf-ld -T test/myLinkScript.ld testAssembly.o -o testAssembly @test/ldoptions.txt command.
+Output: testAssembly executable generated.
+
+Step 4: Running the Executable on Spike with Proxy Kernel
+Executed spike --isa=rv32i pk testAssembly command.
+Output: Successfully executed the RISC-V instructions.
+
+Step 5: Running the Program in Debug Mode on Spike
+Executed spike -d --isa=rv32i pk testAssembly command.
+Output: Debug mode activated, allowing step-by-step execution.
+
+Exercise 3
+
+Step 1: Updating Assembly Code with Labels
+Modified testAssembly.s to replace numerical offsets with labels.
+Output: Jump (JAL) and branch (BNE, BEQ) instructions labelled.
+
+Step 2: Generating Updated RISC-V Assembly File
+Executed:
+    riscv32-unknown-elf-gcc -S testAssembly.c -o testAssembly.s
+Output: Updated testAssembly.s assembly file generated.
+
+Step 3: Assembling the Updated RISC-V Machine Code
+Executed:
+    riscv32-unknown-elf-as testAssembly.s -o testAssembly.o
+Output: testAssembly.o object file generated.
+
+Step 4: Linking the Object File for Execution
+Executed:
+    riscv32-unknown-elf-ld -T test/myLinkScript.ld testAssembly.o -o testAssembly @test/ldoptions.txt
+Output: testAssembly executable generated.
+
+Step 5: Running the Updated Program on Spike
+Executed:
+    spike --isa=rv32i pk testAssembly
+Output: Successfully executed the updated RISC-V instructions.
+
+Step 6: Running Test 3 with the Simulator
+Executed:
+    ./ozu-riscv32 ../input/test3.hex
+Output: Successfully loaded and executed test3.hex in the simulator.
+
+Step 7: Verifying Jump and Branch Execution
+Executed `p` command to print disassembled instructions.
+Output: Labels correctly applied to jump and branch instructions.
+
+Step 8: Comparing Output with Spike
+Executed:
+    spike -d --isa=rv32i pk testAssembly
+Used `untiln pc 0 00010000` to jump to main function.
+Output: Step-by-step execution verified, matching output with simulator.
+
+Step 9: Committing and Pushing Changes to git
+

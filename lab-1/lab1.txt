@@ -1,0 +1,81 @@
+Exercise 1
+
+
+Step 1: Writing the GCD Program
+Output: GCD.c file Created to compute the GCD using the Euclidean algorithm.
+
+Step 2: Compiling the GCD Program
+Compiled GCD.c using the RISC-V toolchain.
+Output: GCD file Created
+
+Step 3: Reading the Binary Content
+Executed "cat GCD" command.
+Output: Binary data displayed (unreadable characters).
+
+Step 4: Checking the File Details
+Executed "file GCD" command.
+Output: GCD: ELF 32-bit LSB executable, UCB RISC-V, soft-float ABI, version 1 (SYSV), statically linked, with debug_info, not stripped
+
+Step 5: Inspecting the ELF File with readelf
+Executed "riscv32-unknown-elf-readelf -a GCD" command.
+Output: ELF file sections, symbols, and headers displayed.
+
+Step 6: Disassembling the Binary with objdump
+Executed "riscv32-unknown-elf-objdump -D GCD" command.
+Output: RISC-V assembly instructions displayed.
+
+Step 7: Running the Program on Spike (Without Proxy Kernel)
+Executed "spike --isa=rv32i GCD" command.
+Output: Access exception occurred while loading payload GCD:
+Memory address 0x10000 is invalid
+Reason: Spike requires the Proxy Kernel (pk) to run the program.
+
+Step 8: Running the Program on Spike with Proxy Kernel
+Executed "spike --isa=rv32i pk GCD" command.
+Output: GCD of 64 and 16 is 16
+
+
+Exercise 2
+
+
+Step 1: Generating RISC-V Assembly File
+Executed "riscv32-unknown-elf-gcc -S GCD.c -o GCD.S" command.
+Output: GCD.S assembly file generated.
+
+Step 2: Generating RISC-V Machine Code
+Executed "riscv32-unknown-elf-as GCD.S -o GCD.o" command.
+Output: GCD.o object file generated.
+
+Step 3: Linking Object File to Generate Executable
+**Executed** "riscv32-unknown-elf-ld GCD.o -o GCD_exe" command.
+
+**Output:**
+riscv32-unknown-elf-ld: warning: cannot find entry symbol _start; defaulting to 00010094
+riscv32-unknown-elf-ld: GCD.o: in function `main':
+GCD.c:(.text+0xa0): undefined reference to `printf'
+
+**Executed** "riscv32-unknown-elf-ld GCD.o -o GCD_exe /opt/riscv/riscv32-unknown-elf/lib/crt0.o \
+/opt/riscv/lib/gcc/riscv32-unknown-elf/14.2.0/crtbegin.o --start-group -lc -lgloss --end-group \
+-L/opt/riscv/lib/gcc/riscv32-unknown-elf/14.2.0 -lgcc /opt/riscv/lib/gcc/riscv32-unknown-elf/14.2.0/crtend.o" command
+
+**Output:** 
+GCD_exe executable generated.
+
+Step 4: Running the Executable on Spike with Proxy Kernel
+Executed "spike --isa=rv32i pk GCD_exe" command.
+Output: GCD of 64 and 16 is 16
+
+Step 5: Running the Program in Debug Mode on Spike
+Executed "spike -d --isa=rv32i pk GCD_exe" command.
+Output: Debug mode activated, allowing instruction-by-instruction execution.
+
+
+
+
+
+
+
+
+
+
+

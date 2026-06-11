@@ -1,0 +1,82 @@
+Lab 3 - RISC-V Assembler and Simulation Report
+
+Exercise 1
+
+
+Step 1: Cloning the Project
+Cloned the lab3 project repository from GitHub.
+Output: All required files and project structure downloaded.
+
+Step 2: Implementing the Assembler in C
+Implemented a RISC-V assembler in C using fgets, sscanf, and strcmp to parse assembly code line by line.
+Output: Assembly lines parsed and instruction names extracted.
+
+Step 3: Identifying Instruction Type
+Determined the instruction type (R, I, S, SB, U, UJ, or System Call) based on the instruction name.
+Output: Instruction types correctly classified.
+
+Step 4: Parsing and Formatting Operands
+Used proper sscanf format strings (e.g., x%d) to extract registers and immediates.
+Output: Register numbers and immediates correctly parsed.
+
+Step 5: Generating 32-bit Hex Instructions
+Applied bit masking and shifting logic to construct 32-bit hex instructions based on RISC-V encoding format.
+Output: Hex instructions constructed accurately.
+
+Step 6: Writing Output to Files
+Wrote hex instructions to .hex file (as string) and .bin file (in little-endian format).
+Output: Files output.hex and output.bin generated successfully.
+
+
+Exercise 2 – Big-Endian to Little-Endian Conversion
+
+
+Step 1: Writing the Assembly Program
+Wrote a RISC-V assembly program that converts 8 words from little-endian to big-endian using lb and sb instructions.
+Output: Assembly program written without using labels.
+
+Step 2: Assembling with Custom Assembler
+Used the custom C-based assembler to convert the assembly into problem1.hex and problem1.bin.
+Output: problem1.hex and problem1.bin files created.
+
+Step 3: Creating an Executable from Binary
+Used the following commands to assemble and link the binary into an executable:
+riscv32-unknown-elf-as -mabi=ilp32 problem1.asm -o problem1.o  
+riscv32-unknown-elf-ld -T myLinkScript.ld -o problem1 problem1.o @ldoptions.txt
+Output: Executable file problem1 created.
+
+Step 4: Disassembling and Debugging with Spike
+
+Executed:
+riscv32-unknown-elf-objdump -d --disassemble=main problem1
+to find the memory address of the program. 
+
+Ran Spike in debug mode:
+spike --isa=RV32IMA -d pk problem1
+
+Jumped to the start of program using:
+untiln pc 0 0x00010000
+Output: Memory converted to big-endian confirmed via register/memory inspection.
+
+
+Exercise 3 – Fibonacci Number Calculation
+
+
+Step 1: Writing the Assembly Program
+Wrote a RISC-V program to compute the 10th Fibonacci number using only allowed instructions and no labels.
+Output: Assembly logic implemented with offset-based blt and bne instructions.
+
+Step 2: Assembling with Custom Assembler
+Converted the program to binary and hex format using the same custom assembler.
+Output: problem2.hex and problem2.bin files created.
+
+Step 3: Generating Executable
+Executed:
+riscv32-unknown-elf-as -mabi=ilp32 problem2.asm -o problem2.o  
+riscv32-unknown-elf-ld -T myLinkScript.ld -o problem2 problem2.o @ldoptions.txt
+Output: Executable problem2 generated.
+
+Step 4: Verifying Fibonacci Calculation on Spike
+Ran the executable in debug mode using Spike and verified the result by checking register x11 (a1):
+spike --isa=RV32IMA -d pk problem2
+output: debug mod works correctly. 

@@ -1,0 +1,28 @@
+# Native build outputs
+*.o
+*.out
+*.exe
+*.bin
+
+# Generated lab executables
+lab-1/GCD
+lab-1/GCD_exe
+lab-2/src/ozu-riscv32
+lab-2/test/testAssembly
+lab-3/assembler
+lab-3/problem1
+lab-3/problem2
+lab-3/problem2,
+
+# HDL simulation output
+*.vcd
+*.fst
+*.log
+
+# Editor and OS files
+.vscode/
+.idea/
+*.swp
+*.tmp
+.DS_Store
+Thumbs.db
